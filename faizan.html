@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Code </title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <style>
+        .qr-code {
+            max-width: 200px;
+            margin: 10px;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Fixed navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="text-center">
+
+            <!-- Get a Placeholder image initially, 
+       this will change according to the 
+       data entered later -->
+            <img src="https://chart.googleapis.com/chart?cht=qr&chl=Hello+World&chs=160x160&chld=L|0"
+                class="qr-code img-thumbnail img-responsive" />
+        </div>
+
+        <div class="form-horizontal" style="margin-top: 50px; margin-left: 300px;">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="content">
+                    Content:
+                </label>
+                <div class="col-sm-8">
+
+                    <!-- Input box to enter the  
+              required data -->
+                    <input type="text" size="60" maxlength="60" class="form-control" id="content"
+                        placeholder="Enter content" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+
+                    <!-- Button to generate QR Code for 
+           the entered data -->
+                    <button type="button" class="btn btn-primary" id="generate">
+                        Generate
+                    </button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="bootstrap/js/jquery-3.3.1.min.js">
+    </script>
+
+    <script>
+        // Function to HTML encode the text 
+        // This creates a new hidden element, 
+        // inserts the given text into it  
+        // and outputs it out as HTML 
+        function htmlEncode(value) {
+            return $('<div/>').text(value)
+                .html();
+        }
+
+        $(function () {
+
+            // Specify an onclick function 
+            // for the generate button 
+            $('#generate').click(function () {
+
+                // Generate the link that would be 
+                // used to generate the QR Code 
+                // with the given data  
+                let finalURL =
+                    'https://chart.googleapis.com/chart?cht=qr&chl=' +
+                    htmlEncode($('#content').val()) +
+                    '&chs=160x160&chld=L|0'
+
+                // Replace the src of the image with 
+                // the QR code image 
+                $('.qr-code').attr('src', finalURL);
+            });
+        }); 
+    </script>
+
+    <footer class="footer py-3 bg-light" style="text-align: center; margin-top: 100px;">
+        <div class="container">
+            <span class="text-muted">Copyright@Matchless@D</span>
+        </div>
+    </footer>
+
+
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+
+</html>
